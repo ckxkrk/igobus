@@ -1,103 +1,82 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AIGO 전세버스 예약 플랫폼</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 1rem auto;
-    padding: 0 1rem;
-    background: #f9f9f9;
-    color: #333;
-  }
-  #header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  #logo {
-    height: 50px;
-  }
-  #language-select {
-    font-size: 1rem;
-    padding: 0.3rem;
-  }
-  h1 {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  #illustration {
-    display: block;
-    margin: 1rem auto;
-    max-width: 100%;
-    height: auto;
-  }
-  #description {
-    font-size: 1.1rem;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIGO Bus Reservation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; color:#333; }
+    header { background:#004d99; color:#fff; padding:20px; display:flex; align-items:center; justify-content:space-between; }
+    header img { height:40px; }
+    nav { margin-left:20px; }
+    nav button { background:#007acc; color:#fff; border:none; padding:8px 12px; margin:0 4px; cursor:pointer; border-radius:4px; }
+    nav button:hover { background:#005f99; }
+    main { padding:40px 20px; max-width:900px; margin:auto; }
+    h1 { font-size:2.5rem; margin-bottom:10px; }
+    section { margin-bottom:40px; }
+    #languages { text-align:right; margin-bottom:20px; }
+    #languages select { padding:6px; font-size:1rem; }
+    /* PayPal QR Section */
+    #paypal-payment { text-align:center; padding:40px 20px; background-color:#f9f9f9; margin-top:40px; border-radius:10px; }
+  </style>
 </head>
 <body>
-  <header id="header">
-    <!-- AIGO 로고 (임시 텍스트 대신 나중에 교체 가능) -->
-    <img id="logo" src="https://dummyimage.com/120x50/007acc/fff&text=AIGO" alt="AIGO Logo" />
-
-    <!-- 언어 선택 -->
-    <select id="language-select" aria-label="언어 선택">
-      <option value="ko">한국어</option>
-      <option value="en">English</option>
-      <option value="zh">中文</option>
-    </select>
+  <header>
+    <img src="AIGO_logo.png" alt="AIGO Logo" />
+    <nav>
+      <button onclick="changeLanguage('ko')">한국어</button>
+      <button onclick="changeLanguage('en')">English</button>
+      <button onclick="changeLanguage('zh')">中文</button>
+    </nav>
   </header>
 
-  <h1 id="title">AIGO 전세버스 예약</h1>
+  <main>
+    <div id="languages">
+      <label for="language-select">Language: </label>
+      <select id="language-select" onchange="changeLanguage(this.value)">
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+      </select>
+    </div>
 
-  <!-- 산+버스 일러스트 SVG 인라인 데이터 URI -->
-  <img
-    id="illustration"
-    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiNFMDBGN0ZBIi8+CiAgPCEtLSDsmrwg7J6Q7J2066mU66GZ7J2EIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsMTUwIDEyNSw1MCAyMDAsMTUwIiBmaWxsPSIjNEY0QzUwIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIxMjUsMTUwIDE4MCw5MCAyMzAsMTUwIiBmaWxsPSIjODFDNzg0Ii8+CiAgPCEtLSDsmYQg7Ji07J2066mU66GZ7J2EIC0tPgogIDxyZWN0IHg9IjYwIiB5PSIxMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzZENDM0MSIvPgogIDxjaXJjbGUgY3g9IjY1IiBjeT0iMTAwIiByPSIyMCIgZmlsbD0iIzM4OEUzQyIvPgogIDxyZWN0IHg9IjIxMCIgeT0iMTEwIiB3aWR0aD0iMTAiIGhlaWdodD0iNDAiIGZpbGw9IiM2RDQzNDEiLz4KICA8Y2lyY2xlIGN4PSIyMTUiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjMzg4RTNDIi8+CiAgPCEtLSDsmZwg7YOc7J6Q7IKs7J2Y7J2066mUIC0tPgogIDxyZWN0IHg9IjExMCIgeT0iMTIwIiB3aWR0aD0iODAiIGhlaWdodD0iMzAiIGZpbGw9IiNGRjk4MDAiIHJ4PSI4IiByeT0iOCIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjE1MCIgcj0iMTAiIGZpbGw9IiM0NTVBNjQiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIxNTAiIHI9IjEwIiBmaWxsPSIjNDU1QTY0Ii8+CiAgPHJlY3QgeD0iMTIwIiB5PSIxMjUiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxNSIgZmlsbD0iI0ZGRiIvPgogIDwhLS0g7Iug7J2Y7J2066mU66GZIC0tPgogIDxjaXJjbGUgY3g9IjI2MCIgY3k9IjQwIiByPSIyNSIgZmlsbD0iI0ZGRUIzQiIvPgo8L3N2Zz4="
-    alt="산과 버스 일러스트"
-  />
+    <section id="intro">
+      <h1 data-lang-ko="AIGO 전세버스 예약 플랫폼"
+          data-lang-en="AIGO Chartered Bus Reservation Platform"
+          data-lang-zh="AIGO 包车预订平台">AIGO 전세버스 예약 플랫폼</h1>
+      <p data-lang-ko="한국 국립공원으로 가는 편리한 전세버스 예약 서비스"
+         data-lang-en="Convenient chartered bus reservation service to Korea's National Parks"
+         data-lang-zh="方便前往韩国国立公园的包车预订服务">
+         한국 국립공원으로 가는 편리한 전세버스 예약 서비스
+      </p>
+      <img src="korean_national_park.jpg" alt="Korean National Park" style="max-width:100%; border-radius:8px; margin-top:20px;" />
+    </section>
 
-  <p id="description">
-    한국의 아름다운 국립공원으로 가는 전세버스 예약 서비스입니다.  
-    개인이나 소수 인원이 함께 버스를 공유하여 저렴하게 여행하세요!
-  </p>
+    <!-- PayPal QR 결제 섹션 추가 -->
+    <section id="paypal-payment">
+      <h2 data-lang-ko="PayPal로 간편 결제하기"
+          data-lang-en="Easy Payment with PayPal QR Code"
+          data-lang-zh="使用 PayPal 二维码轻松支付">PayPal로 간편 결제하기</h2>
+      <p data-lang-ko="아래 QR 코드를 스캔하여 PayPal로 안전하게 결제하세요."
+         data-lang-en="Scan the QR code below to pay securely via PayPal."
+         data-lang-zh="扫描下方二维码，通过 PayPal 安全支付。">아래 QR 코드를 스캔하여 PayPal로 안전하게 결제하세요.</p>
+      <img src="paypal-qr-code.png" alt="PayPal QR Code" style="width:250px; height:250px; margin:20px 0;" />
+      <p data-lang-ko="결제 후 문의사항이 있으면 support@igobus.com 으로 연락주세요."
+         data-lang-en="If you have any questions after payment, please contact support@igobus.com."
+         data-lang-zh="支付后如有疑问，请联系 support@igobus.com。">결제 후 문의사항이 있으면 support@igobus.com 으로 연락주세요.</p>
+    </section>
+  </main>
 
   <script>
-    const langSelect = document.getElementById('language-select');
-    const title = document.getElementById('title');
-    const description = document.getElementById('description');
-
-    // 다국어 텍스트 예시
-    const texts = {
-      ko: {
-        title: 'AIGO 전세버스 예약',
-        description:
-          '한국의 아름다운 국립공원으로 가는 전세버스 예약 서비스입니다. 개인이나 소수 인원이 함께 버스를 공유하여 저렴하게 여행하세요!',
-      },
-      en: {
-        title: 'AIGO Charter Bus Reservation',
-        description:
-          'Charter bus reservation service to Korea’s beautiful national parks. Share a bus with small groups for affordable travel!',
-      },
-      zh: {
-        title: 'AIGO 包车预约',
-        description:
-          '韩国美丽的国家公园包车预约服务。小团体共享巴士，经济实惠的旅行体验！',
-      },
-    };
-
-    langSelect.addEventListener('change', (e) => {
-      const lang = e.target.value;
-      title.textContent = texts[lang].title;
-      description.textContent = texts[lang].description;
-    });
+    function changeLanguage(lang) {
+      document.getElementById('language-select').value = lang;
+      const elements = document.querySelectorAll('[data-lang-ko]');
+      elements.forEach(el => {
+        el.textContent = el.getAttribute(`data-lang-${lang}`);
+      });
+    }
+    // 기본 언어 설정 (한국어)
+    changeLanguage('ko');
   </script>
 </body>
 </html>
