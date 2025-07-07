@@ -22,38 +22,94 @@
   }
   header .content img.logo { width:160px; margin-bottom:1rem; }
   header .content h1 { font-size:2.5rem; margin:0; }
+  .lang-selector {
+    position:absolute; top:1rem; right:1rem; z-index:2;
+  }
+  .lang-selector button {
+    margin-left:0.5rem; background:rgba(0,0,0,0.5); color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.9rem;
+  }
   main { margin-top:40px; display:flex; flex-direction:column; align-items:center; padding:2rem; }
   .form-container { max-width:500px; width:100%; border:1px solid #eee; padding:2rem; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.05); background:#fff; }
   .form-container h2 { text-align:center; margin-bottom:1.5rem; font-size:1.5rem; color:#005BAC; }
   label { display:block; margin:1rem 0 0.5rem; font-weight:bold; }
   input, select { width:100%; padding:0.75rem; font-size:1rem; border:1px solid #ccc; border-radius:8px; }
-  button { margin-top:1.5rem; width:100%; padding:1rem; font-size:1.1rem; background:#005BAC; color:#fff; border:none; border-radius:8px; cursor:pointer; }
-  button:hover { background:#004080; }
+  button.reserve { margin-top:1.5rem; width:100%; padding:1rem; font-size:1.1rem; background:#005BAC; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+  button.reserve:hover { background:#004080; }
 </style>
 </head>
 <body>
 <header>
   <div class="overlay"></div>
+  <div class="lang-selector">
+    <button onclick="setLanguage('ko')">한국어</button>
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('zh')">中文</button>
+  </div>
   <div class="content">
     <img src="logo.png" alt="AIGO Logo" class="logo" />
-    <h1>AIGO BUS 예약 플랫폼</h1>
+    <h1 id="main-title">AIGO BUS 예약 플랫폼</h1>
   </div>
 </header>
 <main>
   <div class="form-container">
-    <h2>버스 예약하기</h2>
+    <h2 id="form-title">버스 예약하기</h2>
     <form id="reservationForm">
-      <label for="from">출발지</label>
+      <label for="from" id="label-from">출발지</label>
       <input type="text" id="from" name="from" placeholder="출발지를 입력하세요" required />
-      <label for="to">도착지</label>
+      <label for="to" id="label-to">도착지</label>
       <input type="text" id="to" name="to" placeholder="도착지를 입력하세요" required />
-      <label for="date">날짜</label>
+      <label for="date" id="label-date">날짜</label>
       <input type="date" id="date" name="date" required />
-      <button type="submit">예약 검색</button>
+      <button type="submit" class="reserve" id="reserve-btn">예약 검색</button>
     </form>
   </div>
 </main>
 <script>
+  const translations = {
+    ko: {
+      mainTitle: "AIGO BUS 예약 플랫폼",
+      formTitle: "버스 예약하기",
+      from: "출발지",
+      to: "도착지",
+      date: "날짜",
+      placeholderFrom: "출발지를 입력하세요",
+      placeholderTo: "도착지를 입력하세요",
+      reserve: "예약 검색"
+    },
+    en: {
+      mainTitle: "AIGO BUS Reservation Platform",
+      formTitle: "Bus Reservation",
+      from: "Departure",
+      to: "Arrival",
+      date: "Date",
+      placeholderFrom: "Enter departure",
+      placeholderTo: "Enter arrival",
+      reserve: "Search Reservation"
+    },
+    zh: {
+      mainTitle: "AIGO巴士预订平台",
+      formTitle: "巴士预订",
+      from: "出发地",
+      to: "目的地",
+      date: "日期",
+      placeholderFrom: "输入出发地",
+      placeholderTo: "输入目的地",
+      reserve: "搜索预订"
+    }
+  };
+
+  function setLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById('main-title').innerText = t.mainTitle;
+    document.getElementById('form-title').innerText = t.formTitle;
+    document.getElementById('label-from').innerText = t.from;
+    document.getElementById('label-to').innerText = t.to;
+    document.getElementById('label-date').innerText = t.date;
+    document.getElementById('from').placeholder = t.placeholderFrom;
+    document.getElementById('to').placeholder = t.placeholderTo;
+    document.getElementById('reserve-btn').innerText = t.reserve;
+  }
+
   document.getElementById('reservationForm').addEventListener('submit', function(e) {
     e.preventDefault();
     alert('예약 검색 기능은 아직 개발 중입니다.');
