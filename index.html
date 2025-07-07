@@ -3,117 +3,101 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AIGO BUS 예약</title>
+<title>AIGO 전세버스 예약 플랫폼</title>
 <style>
-  body { margin:0; font-family:'Noto Sans KR', sans-serif; color:#333; }
-  header {
-    position:relative;
-    width:100%; height:400px;
-    background: url('bus-bg.jpg') center/cover no-repeat;
-    display:flex; flex-direction:column;
-    justify-content: center; align-items: center;
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 0 1rem;
+    background: #f9f9f9;
+    color: #333;
   }
-  header .overlay {
-    position:absolute; top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.4);
+  #header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  header .content {
-    position:relative; z-index:1; text-align:center; color:#fff;
+  #logo {
+    height: 50px;
   }
-  header .content img.logo { width:160px; margin-bottom:1rem; }
-  header .content h1 { font-size:2.5rem; margin:0; }
-  .lang-selector {
-    position:absolute; top:1rem; right:1rem; z-index:2;
+  #language-select {
+    font-size: 1rem;
+    padding: 0.3rem;
   }
-  .lang-selector button {
-    margin-left:0.5rem; background:rgba(0,0,0,0.5); color:#fff; border:none; padding:0.4rem 0.8rem; border-radius:4px; cursor:pointer; font-size:0.9rem;
+  h1 {
+    text-align: center;
+    margin-top: 1rem;
   }
-  main { margin-top:40px; display:flex; flex-direction:column; align-items:center; padding:2rem; }
-  .form-container { max-width:500px; width:100%; border:1px solid #eee; padding:2rem; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.05); background:#fff; }
-  .form-container h2 { text-align:center; margin-bottom:1.5rem; font-size:1.5rem; color:#005BAC; }
-  label { display:block; margin:1rem 0 0.5rem; font-weight:bold; }
-  input, select { width:100%; padding:0.75rem; font-size:1rem; border:1px solid #ccc; border-radius:8px; }
-  button.reserve { margin-top:1.5rem; width:100%; padding:1rem; font-size:1.1rem; background:#005BAC; color:#fff; border:none; border-radius:8px; cursor:pointer; }
-  button.reserve:hover { background:#004080; }
+  #illustration {
+    display: block;
+    margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+  }
+  #description {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="overlay"></div>
-  <div class="lang-selector">
-    <button onclick="setLanguage('ko')">한국어</button>
-    <button onclick="setLanguage('en')">EN</button>
-    <button onclick="setLanguage('zh')">中文</button>
-  </div>
-  <div class="content">
-    <img src="logo.png" alt="AIGO Logo" class="logo" />
-    <h1 id="main-title">AIGO BUS 예약 플랫폼</h1>
-  </div>
-</header>
-<main>
-  <div class="form-container">
-    <h2 id="form-title">버스 예약하기</h2>
-    <form id="reservationForm">
-      <label for="from" id="label-from">출발지</label>
-      <input type="text" id="from" name="from" placeholder="출발지를 입력하세요" required />
-      <label for="to" id="label-to">도착지</label>
-      <input type="text" id="to" name="to" placeholder="도착지를 입력하세요" required />
-      <label for="date" id="label-date">날짜</label>
-      <input type="date" id="date" name="date" required />
-      <button type="submit" class="reserve" id="reserve-btn">예약 검색</button>
-    </form>
-  </div>
-</main>
-<script>
-  const translations = {
-    ko: {
-      mainTitle: "AIGO BUS 예약 플랫폼",
-      formTitle: "버스 예약하기",
-      from: "출발지",
-      to: "도착지",
-      date: "날짜",
-      placeholderFrom: "출발지를 입력하세요",
-      placeholderTo: "도착지를 입력하세요",
-      reserve: "예약 검색"
-    },
-    en: {
-      mainTitle: "AIGO BUS Reservation Platform",
-      formTitle: "Bus Reservation",
-      from: "Departure",
-      to: "Arrival",
-      date: "Date",
-      placeholderFrom: "Enter departure",
-      placeholderTo: "Enter arrival",
-      reserve: "Search Reservation"
-    },
-    zh: {
-      mainTitle: "AIGO巴士预订平台",
-      formTitle: "巴士预订",
-      from: "出发地",
-      to: "目的地",
-      date: "日期",
-      placeholderFrom: "输入出发地",
-      placeholderTo: "输入目的地",
-      reserve: "搜索预订"
-    }
-  };
+  <header id="header">
+    <!-- AIGO 로고 (임시 텍스트 대신 나중에 교체 가능) -->
+    <img id="logo" src="https://dummyimage.com/120x50/007acc/fff&text=AIGO" alt="AIGO Logo" />
 
-  function setLanguage(lang) {
-    const t = translations[lang];
-    document.getElementById('main-title').innerText = t.mainTitle;
-    document.getElementById('form-title').innerText = t.formTitle;
-    document.getElementById('label-from').innerText = t.from;
-    document.getElementById('label-to').innerText = t.to;
-    document.getElementById('label-date').innerText = t.date;
-    document.getElementById('from').placeholder = t.placeholderFrom;
-    document.getElementById('to').placeholder = t.placeholderTo;
-    document.getElementById('reserve-btn').innerText = t.reserve;
-  }
+    <!-- 언어 선택 -->
+    <select id="language-select" aria-label="언어 선택">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+    </select>
+  </header>
 
-  document.getElementById('reservationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('예약 검색 기능은 아직 개발 중입니다.');
-  });
-</script>
+  <h1 id="title">AIGO 전세버스 예약</h1>
+
+  <!-- 산+버스 일러스트 SVG 인라인 데이터 URI -->
+  <img
+    id="illustration"
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDMwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiNFMDBGN0ZBIi8+CiAgPCEtLSDsmrwg7J6Q7J2066mU66GZ7J2EIC0tPgogIDxwb2x5Z29uIHBvaW50cz0iNTAsMTUwIDEyNSw1MCAyMDAsMTUwIiBmaWxsPSIjNEY0QzUwIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIxMjUsMTUwIDE4MCw5MCAyMzAsMTUwIiBmaWxsPSIjODFDNzg0Ii8+CiAgPCEtLSDsmYQg7Ji07J2066mU66GZ7J2EIC0tPgogIDxyZWN0IHg9IjYwIiB5PSIxMTAiIHdpZHRoPSIxMCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzZENDM0MSIvPgogIDxjaXJjbGUgY3g9IjY1IiBjeT0iMTAwIiByPSIyMCIgZmlsbD0iIzM4OEUzQyIvPgogIDxyZWN0IHg9IjIxMCIgeT0iMTEwIiB3aWR0aD0iMTAiIGhlaWdodD0iNDAiIGZpbGw9IiM2RDQzNDEiLz4KICA8Y2lyY2xlIGN4PSIyMTUiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjMzg4RTNDIi8+CiAgPCEtLSDsmZwg7YOc7J6Q7IKs7J2Y7J2066mUIC0tPgogIDxyZWN0IHg9IjExMCIgeT0iMTIwIiB3aWR0aD0iODAiIGhlaWdodD0iMzAiIGZpbGw9IiNGRjk4MDAiIHJ4PSI4IiByeT0iOCIvPgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjE1MCIgcj0iMTAiIGZpbGw9IiM0NTVBNjQiLz4KICA8Y2lyY2xlIGN4PSIxNzAiIGN5PSIxNTAiIHI9IjEwIiBmaWxsPSIjNDU1QTY0Ii8+CiAgPHJlY3QgeD0iMTIwIiB5PSIxMjUiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxNSIgZmlsbD0iI0ZGRiIvPgogIDwhLS0g7Iug7J2Y7J2066mU66GZIC0tPgogIDxjaXJjbGUgY3g9IjI2MCIgY3k9IjQwIiByPSIyNSIgZmlsbD0iI0ZGRUIzQiIvPgo8L3N2Zz4="
+    alt="산과 버스 일러스트"
+  />
+
+  <p id="description">
+    한국의 아름다운 국립공원으로 가는 전세버스 예약 서비스입니다.  
+    개인이나 소수 인원이 함께 버스를 공유하여 저렴하게 여행하세요!
+  </p>
+
+  <script>
+    const langSelect = document.getElementById('language-select');
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+
+    // 다국어 텍스트 예시
+    const texts = {
+      ko: {
+        title: 'AIGO 전세버스 예약',
+        description:
+          '한국의 아름다운 국립공원으로 가는 전세버스 예약 서비스입니다. 개인이나 소수 인원이 함께 버스를 공유하여 저렴하게 여행하세요!',
+      },
+      en: {
+        title: 'AIGO Charter Bus Reservation',
+        description:
+          'Charter bus reservation service to Korea’s beautiful national parks. Share a bus with small groups for affordable travel!',
+      },
+      zh: {
+        title: 'AIGO 包车预约',
+        description:
+          '韩国美丽的国家公园包车预约服务。小团体共享巴士，经济实惠的旅行体验！',
+      },
+    };
+
+    langSelect.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      title.textContent = texts[lang].title;
+      description.textContent = texts[lang].description;
+    });
+  </script>
 </body>
 </html>
