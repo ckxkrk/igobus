@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IGOBUS - Bus Reservation Platform</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background: #f5f5f5;
+    color: #333;
+  }
+  header {
+    background: #0078d7;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+  }
+  h1 {
+    margin: 0;
+  }
+  main {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+  }
+  input, select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    background: #0078d7;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #005ea1;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Welcome to IGOBUS</h1>
+  <p>Korea’s easy bus reservation platform</p>
+</header>
+<main>
+  <form id="reservationForm">
+    <label for="from">Departure</label>
+    <input type="text" id="from" name="from" placeholder="Enter departure city" required />
+    
+    <label for="to">Destination</label>
+    <input type="text" id="to" name="to" placeholder="Enter destination city" required />
+    
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" required />
+    
+    <button type="submit">Search Buses</button>
+  </form>
+</main>
+<script>
+  document.getElementById('reservationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Search function is under development!');
+  });
+</script>
+</body>
+</html>
