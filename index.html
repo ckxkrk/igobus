@@ -1,82 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>IGOBUS - Bus Reservation Platform</title>
+<title>IGOBUS 예약</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background: #f5f5f5;
-    color: #333;
-  }
-  header {
-    background: #0078d7;
-    color: white;
-    padding: 1rem 2rem;
-    text-align: center;
-  }
-  h1 {
-    margin: 0;
-  }
-  main {
-    max-width: 600px;
-    margin: 2rem auto;
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  label {
-    display: block;
-    margin: 1rem 0 0.5rem;
-  }
-  input, select {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  button {
-    margin-top: 1.5rem;
-    padding: 0.75rem;
-    background: #0078d7;
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  button:hover {
-    background: #005ea1;
-  }
+  body { margin:0; font-family:'Noto Sans KR', sans-serif; background:#fff; color:#333; }
+  header { background:#005BAC; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:fixed; width:100%; top:0; z-index:100; }
+  header h1 { margin:0; font-size:1.2rem; }
+  header nav a { color:#fff; margin-left:1rem; text-decoration:none; font-size:0.95rem; }
+  main { margin-top:100px; display:flex; flex-direction:column; align-items:center; padding:2rem; }
+  .form-container { max-width:500px; width:100%; border:1px solid #eee; padding:2rem; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.05); }
+  .form-container h2 { text-align:center; margin-bottom:1.5rem; font-size:1.5rem; color:#005BAC; }
+  label { display:block; margin:1rem 0 0.5rem; font-weight:bold; }
+  input, select { width:100%; padding:0.75rem; font-size:1rem; border:1px solid #ccc; border-radius:8px; }
+  button { margin-top:1.5rem; width:100%; padding:1rem; font-size:1.1rem; background:#005BAC; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+  button:hover { background:#004080; }
 </style>
 </head>
 <body>
 <header>
-  <h1>Welcome to IGOBUS</h1>
-  <p>Korea’s easy bus reservation platform</p>
+  <h1>IGOBUS</h1>
+  <nav>
+    <a href="#">로그인</a>
+    <a href="#">회원가입</a>
+  </nav>
 </header>
 <main>
-  <form id="reservationForm">
-    <label for="from">Departure</label>
-    <input type="text" id="from" name="from" placeholder="Enter departure city" required />
-    
-    <label for="to">Destination</label>
-    <input type="text" id="to" name="to" placeholder="Enter destination city" required />
-    
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" required />
-    
-    <button type="submit">Search Buses</button>
-  </form>
+  <div class="form-container">
+    <h2>버스 예약하기</h2>
+    <form id="reservationForm">
+      <label for="from">출발지</label>
+      <input type="text" id="from" name="from" placeholder="출발지를 입력하세요" required />
+      <label for="to">도착지</label>
+      <input type="text" id="to" name="to" placeholder="도착지를 입력하세요" required />
+      <label for="date">날짜</label>
+      <input type="date" id="date" name="date" required />
+      <button type="submit">예약 검색</button>
+    </form>
+  </div>
 </main>
 <script>
   document.getElementById('reservationForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Search function is under development!');
+    alert('예약 검색 기능은 아직 개발 중입니다.');
   });
 </script>
 </body>
